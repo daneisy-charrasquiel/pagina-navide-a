@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Página Navideña Mágica</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Contenedor de nieve -->
+    <div class="snow-container" id="snowContainer"></div>
+
+    <!-- Audio para música navideña - Jingle Bells -->
+    <audio id="christmasMusic" loop preload="auto" crossorigin="anonymous">
+        <source src="{{ url_for('audio', filename='audio_navideño.mp4') }}" type="audio/mp4">
+        <source src="/audio/audio_navideño.mp4" type="audio/mp4">
+        <source src="{{ url_for('audio', filename='audio_navideño.mp4') }}" type="audio/mpeg">
+    </audio>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <h1>🎄 ¡Feliz Navidad! 🎄</h1>
+            
+        <!-- Contador regresivo -->
+        <div class="countdown-container">
+            <div class="countdown-title">⏰ Cuenta Regresiva para Navidad</div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">0</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">0</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">0</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">0</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 1: Muñeco Navideño Bailarín (PRIMERO) -->
+        <section class="interactive-section doll-section">
+            <h2 class="section-title">🎭 Muñeco Navideño Bailarín</h2>
+            <div class="doll-container">
+                <div class="doll-wrapper">
+                    <div class="doll" id="dancingDoll">
+                        <!-- Gorro navideño -->
+                        <div class="doll-hat">
+                            <div class="hat-top"></div>
+                            <div class="hat-base"></div>
+                            <div class="hat-pom"></div>
+                        </div>
+                        <!-- Cabeza -->
+                        <div class="doll-head">
+                            <img id="faceImage" src="" alt="" style="display: none;">
+                            <div class="doll-face">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                                <div class="mouth"></div>
+                            </div>
+                        </div>
+                        <!-- Bufanda -->
+                        <div class="doll-scarf"></div>
+                        <!-- Cuerpo -->
+                        <div class="doll-body">
+                            <div class="doll-arm left-arm">
+                                <div class="doll-glove"></div>
+                            </div>
+                            <div class="doll-torso">
+                                <div class="doll-belt"></div>
+                            </div>
+                            <div class="doll-arm right-arm">
+                                <div class="doll-glove"></div>
+                            </div>
+                        </div>
+                        <!-- Piernas -->
+                        <div class="doll-legs">
+                            <div class="doll-leg left-leg">
+                                <div class="doll-boot"></div>
+                            </div>
+                            <div class="doll-leg right-leg">
+                                <div class="doll-boot"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="doll-controls">
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                    <button class="doll-btn" id="uploadPhotoBtn">📷 Subir Tu Foto</button>
+                    <button class="doll-btn" id="danceBtn">💃 Bailar</button>
+                    <button class="doll-btn" id="stopDanceBtn">⏸ Detener</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección 2: Juego de Memoria Navideño -->
+        <section class="interactive-section game-section">
+            <h2 class="section-title">🎯 Juego de Memoria Navideño</h2>
+            <div class="game-container">
+                <div class="game-info">
+                    <p>Puntuación: <span id="score">0</span></p>
+                    <p>Pares encontrados: <span id="pairs">0</span> / 6</p>
+                    <button class="reset-btn" id="resetGame">🔄 Reiniciar Juego</button>
+                </div>
+                <div class="memory-game" id="memoryGame"></div>
+            </div>
+        </section>
+
+        <!-- Árbol navideño (AL FINAL) -->
+        <div class="tree-section">
+            <h2 class="tree-title">🎄 Árbol Navideño 🎄</h2>
+            
+            <!-- Controles de luces -->
+            <div class="controls-container">
+                <button class="control-btn on" id="lightsOnBtn">✨ Encender Luces</button>
+                <button class="control-btn off" id="lightsOffBtn">🔌 Apagar Luces</button>
+            </div>
+                
+            <div class="tree-container">
+                <div class="tree">
+                    <!-- Estrella -->
+                    <div class="star"></div>
+                    
+                    <!-- Capas del árbol -->
+                    <div class="tree-layer"></div>
+                    <div class="tree-layer"></div>
+                    <div class="tree-layer"></div>
+                    
+                    <!-- Tronco -->
+                    <div class="trunk"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control de música -->
+        <div class="music-control">
+            <span class="music-label">🎵 Jingle Bells:</span>
+            <button class="music-btn" id="musicBtn">▶ Reproducir</button>
+        </div>
+
+        <div class="message">Que la magia de la Navidad llene tu hogar de alegría</div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

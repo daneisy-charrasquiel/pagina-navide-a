@@ -1,0 +1,859 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(180deg, #0a0e27 0%, #1a1a3e 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Animación de nieve */
+.snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    font-family: Arial;
+    text-shadow: 0 0 5px white;
+    animation: fall linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
+/* Contenedor principal */
+.container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Contador regresivo */
+.countdown-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.countdown-title {
+    color: #fff;
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.countdown-item {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 15px 20px;
+    border-radius: 10px;
+    min-width: 80px;
+}
+
+.countdown-number {
+    color: #fff;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+}
+
+.countdown-label {
+    color: #fff;
+    font-size: 0.9em;
+    margin-top: 5px;
+    text-transform: uppercase;
+}
+
+/* Controles de luces */
+.controls-container {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.control-btn.on {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+}
+
+.control-btn.off {
+    background: linear-gradient(135deg, #f44336, #da190b);
+    color: white;
+}
+
+/* Árbol navideño */
+.tree-container {
+    position: relative;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+}
+
+.tree {
+    position: relative;
+    width: 300px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Tronco del árbol - UNIDO AL ÁRBOL */
+.trunk {
+    position: absolute;
+    bottom: 50px;
+    width: 40px;
+    height: 60px;
+    background: #8B4513;
+    border-radius: 5px 5px 0 0;
+    z-index: 1;
+}
+
+/* Capas del árbol */
+.tree-layer {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 75px solid transparent;
+    border-right: 75px solid transparent;
+    border-bottom: 100px solid #0d5f0d;
+    z-index: 2;
+}
+
+/* Capa 1 (la más pequeña - arriba) */
+.tree-layer:nth-child(1) {
+    bottom: 340px;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    border-bottom: 50px solid #14b814;
+}
+
+/* Capa 2 */
+.tree-layer:nth-child(2) {
+    bottom: 290px;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 70px solid #119911;
+}
+
+/* Capa 3 */
+.tree-layer:nth-child(3) {
+    bottom: 220px;
+    border-left: 70px solid transparent;
+    border-right: 70px solid transparent;
+    border-bottom: 90px solid #0f7a0f;
+}
+
+/* Capa 4 (la más grande - abajo) */
+.tree-layer:nth-child(4) {
+    bottom: 130px;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 110px solid #0d5f0d;
+}
+
+/* Estrella - EN LA PUNTA DEL ÁRBOL */
+.star {
+    position: absolute;
+    bottom: 365px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: gold;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    z-index: 10;
+    animation: starTwinkle 2s infinite;
+    box-shadow: 0 0 20px gold;
+}
+
+@keyframes starTwinkle {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        box-shadow: 0 0 20px gold;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.2);
+        box-shadow: 0 0 30px gold, 0 0 40px gold;
+    }
+}
+
+/* Luces navideñas */
+.light {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+    animation: blink 1.5s infinite;
+    transition: opacity 0.3s ease;
+    z-index: 3;
+}
+
+.light.off {
+    opacity: 0.1 !important;
+    animation: none;
+}
+
+.light.red {
+    background: #ff0000;
+    color: #ff0000;
+}
+
+.light.blue {
+    background: #0066ff;
+    color: #0066ff;
+}
+
+.light.yellow {
+    background: #ffff00;
+    color: #ffff00;
+}
+
+.light.green {
+    background: #00ff00;
+    color: #00ff00;
+}
+
+.light.purple {
+    background: #ff00ff;
+    color: #ff00ff;
+}
+
+.light.orange {
+    background: #ff8800;
+    color: #ff8800;
+}
+
+/* Animación de parpadeo */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+}
+
+/* Mensaje navideño */
+.message {
+    color: #fff;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1.5em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Control de música */
+.music-control {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.music-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.music-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.music-label {
+    color: #fff;
+    font-size: 1em;
+}
+
+/* Sección Interactiva */
+.interactive-section {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-section {
+    margin-bottom: 40px;
+}
+
+.doll-section {
+    margin-top: 40px;
+}
+
+.section-title {
+    color: #fff;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Juego de Memoria */
+.game-container {
+    margin-top: 30px;
+}
+
+.game-title {
+    color: #fff;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.game-info p {
+    color: #fff;
+    font-size: 1.2em;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.reset-btn {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.memory-game {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.memory-card {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3em;
+    transition: transform 0.6s ease;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.memory-card.flipped {
+    transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+    opacity: 1;
+    cursor: default;
+    pointer-events: none;
+    /* Mantener flipped para que se vea la imagen */
+}
+
+.memory-card .card-front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+}
+
+.memory-card .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.memory-card .card-back img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Muñeco Bailarín */
+.doll-container {
+    margin-top: 20px;
+}
+
+.doll-title {
+    color: #fff;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 30px;
+}
+
+.doll-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    margin-bottom: 20px;
+}
+
+.doll {
+    position: relative;
+    width: 200px;
+    height: 400px;
+}
+
+/* Gorro navideño */
+.doll-hat {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15;
+}
+
+.hat-top {
+    width: 0;
+    height: 0;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    border-bottom: 50px solid #dc143c;
+    margin: 0 auto;
+}
+
+.hat-base {
+    width: 140px;
+    height: 20px;
+    background: #dc143c;
+    border-radius: 10px;
+    margin-top: -5px;
+    border: 2px solid #8b0000;
+}
+
+.hat-pom {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+.doll-head {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    background: #ffdbac;
+    border-radius: 50%;
+    border: 3px solid #8B4513;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.doll-head #faceImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11;
+}
+
+.doll-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.eye {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #000;
+    border-radius: 50%;
+    top: 40%;
+}
+
+.left-eye {
+    left: 30%;
+}
+
+.right-eye {
+    right: 30%;
+}
+
+.mouth {
+    position: absolute;
+    width: 30px;
+    height: 15px;
+    border: 3px solid #000;
+    border-top: none;
+    border-radius: 0 0 30px 30px;
+    bottom: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Bufanda navideña */
+.doll-scarf {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 30px;
+    background: linear-gradient(90deg, #228B22, #32CD32, #228B22);
+    border-radius: 15px;
+    border: 2px solid #006400;
+    z-index: 12;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.doll-scarf::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(90deg, #228B22, #32CD32);
+    border-radius: 50%;
+    border: 2px solid #006400;
+}
+
+.doll-body {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.doll-torso {
+    width: 100px;
+    height: 120px;
+    background: linear-gradient(135deg, #dc143c, #8b0000);
+    border-radius: 50px 50px 20px 20px;
+    border: 3px solid #8B0000;
+    position: relative;
+}
+
+.doll-belt {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 15px;
+    background: #000000;
+    border-radius: 10px;
+    border: 2px solid #333;
+}
+
+.doll-belt::before {
+    content: '⚫';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+}
+
+.doll-arm {
+    width: 30px;
+    height: 80px;
+    background: #ffdbac;
+    border-radius: 15px;
+    border: 2px solid #8B4513;
+    position: relative;
+}
+
+.doll-glove {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 25px;
+    background: #000000;
+    border-radius: 15px 15px 5px 5px;
+    border: 2px solid #333;
+}
+
+.doll-legs {
+    position: absolute;
+    top: 270px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.doll-leg {
+    width: 35px;
+    height: 100px;
+    background: #0000ff;
+    border-radius: 15px;
+    border: 2px solid #00008B;
+    position: relative;
+}
+
+.doll-boot {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 30px;
+    background: #000000;
+    border-radius: 10px 10px 5px 5px;
+    border: 2px solid #333;
+}
+
+.doll.dancing .doll-hat {
+    animation: hatDance 0.5s ease-in-out infinite;
+}
+
+.doll.dancing .doll-head {
+    animation: headDance 0.5s ease-in-out infinite;
+}
+
+.doll.dancing .doll-scarf {
+    animation: scarfDance 0.5s ease-in-out infinite;
+}
+
+.doll.dancing .left-arm {
+    animation: armDanceLeft 0.6s ease-in-out infinite;
+}
+
+.doll.dancing .right-arm {
+    animation: armDanceRight 0.6s ease-in-out infinite;
+}
+
+.doll.dancing .doll-torso {
+    animation: torsoDance 0.5s ease-in-out infinite;
+}
+
+.doll.dancing .left-leg {
+    animation: legDanceLeft 0.4s ease-in-out infinite;
+}
+
+.doll.dancing .right-leg {
+    animation: legDanceRight 0.4s ease-in-out infinite;
+}
+
+@keyframes hatDance {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-3deg); }
+    75% { transform: translateX(-50%) rotate(3deg); }
+}
+
+@keyframes headDance {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-5deg); }
+    75% { transform: translateX(-50%) rotate(5deg); }
+}
+
+@keyframes scarfDance {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-2deg); }
+    75% { transform: translateX(-50%) rotate(2deg); }
+}
+
+@keyframes armDanceLeft {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-45deg); }
+}
+
+@keyframes armDanceRight {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(45deg); }
+}
+
+@keyframes torsoDance {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25% { transform: translateX(-50%) rotate(-3deg); }
+    75% { transform: translateX(-50%) rotate(3deg); }
+}
+
+@keyframes legDanceLeft {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(20deg); }
+}
+
+@keyframes legDanceRight {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-20deg); }
+}
+
+.doll-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.doll-btn {
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.doll-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.doll-btn:active {
+    transform: translateY(0);
+}
+
+/* Sección del Árbol */
+.tree-section {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.tree-title {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.tree-section .controls-container {
+    margin-bottom: 30px;
+}
